@@ -1,9 +1,17 @@
 package com.sample.drivers.entity;
 
+import io.jmix.core.FileRef;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -18,6 +26,9 @@ public class Document {
     @Id
     private UUID id;
 
+    @Column(name = "FILE_REF", length = 1024)
+    private FileRef fileRef;
+
     @Column(name = "TYPE_", nullable = false)
     @NotNull
     private String type;
@@ -25,6 +36,22 @@ public class Document {
     @JoinColumn(name = "DRIVER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Driver driver;
+
+    public FileRef getFileRef() {
+        return fileRef;
+    }
+
+    public void setFileRef(FileRef fileRef) {
+        this.fileRef = fileRef;
+    }
+
+    public FileRef getFileRedf() {
+        return fileRef;
+    }
+
+    public void setFileRedf(FileRef fileRedf) {
+        this.fileRef = fileRedf;
+    }
 
     public Driver getDriver() {
         return driver;

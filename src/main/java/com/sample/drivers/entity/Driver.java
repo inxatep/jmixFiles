@@ -6,7 +6,14 @@ import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
@@ -21,6 +28,9 @@ public class Driver {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @Column(name = "PHOTO")
+    private byte[] photo;
 
     @InstanceName
     @Column(name = "FIRST_NAME", nullable = false)
@@ -47,6 +57,14 @@ public class Driver {
     @Composition
     @OneToMany(mappedBy = "driver")
     private Set<Document> documents;
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 
     public Set<Document> getDocuments() {
         return documents;
